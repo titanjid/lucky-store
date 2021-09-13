@@ -14,7 +14,7 @@ const showProducts = (products) => {
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div>
-    <img class="product-image" src=${image}></img>
+    <img class="product-image" src=${product.image}></img>
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
@@ -29,7 +29,7 @@ let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
-
+  updateTotal();
   updateTaxAndCharge();
   document.getElementById("total-Products").innerText = count;
 };
@@ -45,6 +45,7 @@ const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
   const total = convertedOldPrice + convertPrice;
+  // const alltotal=total.toFixed(2);
   document.getElementById(id).innerText = Math.round(total);
 };
 
@@ -73,8 +74,7 @@ const updateTaxAndCharge = () => {
 //grandTotal update function
 const updateTotal = () => {
   const grandTotal =
-    getInputValue("price") + getInputValue("delivery-charge") +
-    getInputValue("total-tax");
+    getInputValue("price") + getInputValue("delivery-charge") +getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal;
 };
 loadProducts();
